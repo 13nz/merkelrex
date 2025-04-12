@@ -1,0 +1,3 @@
+F:/UNI_Sem3/CM2005_OOP/merkelrex/cmake-build-debug/CMakeFiles/CurrencyExchange.dir
+F:/UNI_Sem3/CM2005_OOP/merkelrex/cmake-build-debug/CMakeFiles/edit_cache.dir
+F:/UNI_Sem3/CM2005_OOP/merkelrex/cmake-build-debug/CMakeFiles/rebuild_cache.dir
