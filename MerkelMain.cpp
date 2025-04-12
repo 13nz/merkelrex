@@ -129,9 +129,15 @@ void MerkelMain::printWallet() {
 void MerkelMain::goToNextTimeFrame() {
     std::cout << "Continuing to next time frame. " << std::endl;
 
+    std::vector<OrderBookEntry> sales  = orderBook.matchAsksToBids("ETH/BTC", currentTime);
     currentTime = orderBook.getNextTime(currentTime);
 
     std::cout << "Current time: " << currentTime << std::endl;
+    std::cout << "Sales: " << sales.size() << std::endl;
+
+    for (OrderBookEntry& sale : sales) {
+        std::cout << "Sale amount: " << sale.amount << " Price: " << sale.price << std::endl;
+    }
 }
 
 /** process int user option */
