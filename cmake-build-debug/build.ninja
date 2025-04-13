@@ -79,6 +79,12 @@ build CMakeFiles/CurrencyExchange.dir/OrderBook.cpp.obj: CXX_COMPILER__CurrencyE
   OBJECT_DIR = CMakeFiles\CurrencyExchange.dir
   OBJECT_FILE_DIR = CMakeFiles\CurrencyExchange.dir
 
+build CMakeFiles/CurrencyExchange.dir/Wallet.cpp.obj: CXX_COMPILER__CurrencyExchange_unscanned_Debug F$:/UNI_Sem3/CM2005_OOP/merkelrex/Wallet.cpp || cmake_object_order_depends_target_CurrencyExchange
+  DEP_FILE = CMakeFiles\CurrencyExchange.dir\Wallet.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\CurrencyExchange.dir
+  OBJECT_FILE_DIR = CMakeFiles\CurrencyExchange.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target CurrencyExchange
@@ -87,7 +93,7 @@ build CMakeFiles/CurrencyExchange.dir/OrderBook.cpp.obj: CXX_COMPILER__CurrencyE
 #############################################
 # Link the executable CurrencyExchange.exe
 
-build CurrencyExchange.exe: CXX_EXECUTABLE_LINKER__CurrencyExchange_Debug CMakeFiles/CurrencyExchange.dir/main.cpp.obj CMakeFiles/CurrencyExchange.dir/OrderBookEntry.cpp.obj CMakeFiles/CurrencyExchange.dir/MerkelMain.cpp.obj CMakeFiles/CurrencyExchange.dir/CSVReader.cpp.obj CMakeFiles/CurrencyExchange.dir/OrderBook.cpp.obj
+build CurrencyExchange.exe: CXX_EXECUTABLE_LINKER__CurrencyExchange_Debug CMakeFiles/CurrencyExchange.dir/main.cpp.obj CMakeFiles/CurrencyExchange.dir/OrderBookEntry.cpp.obj CMakeFiles/CurrencyExchange.dir/MerkelMain.cpp.obj CMakeFiles/CurrencyExchange.dir/CSVReader.cpp.obj CMakeFiles/CurrencyExchange.dir/OrderBook.cpp.obj CMakeFiles/CurrencyExchange.dir/Wallet.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\CurrencyExchange.dir

@@ -8,7 +8,7 @@
 #pragma once
 #include <string>
 
-enum class OrderBookType{bid, ask, sale, unknown};
+enum class OrderBookType{bid, ask, bidsale, asksale, unknown};
 
 class OrderBookEntry {
 public:
@@ -16,7 +16,9 @@ public:
                     double _amount,
                     std::string _timestamp,
                     std::string _product,
-                    OrderBookType _orderType);
+                    OrderBookType _orderType,
+                    std::string username = "dataset"
+                    );
 
     static OrderBookType stringToOrderBookType(std::string s);
     static bool compareByTimestamp(OrderBookEntry& entry1, OrderBookEntry& entry2);
@@ -28,6 +30,7 @@ public:
     std::string timestamp;
     std::string product;
     OrderBookType orderType;
+    std::string username;
 };
 
 #endif //ORDERBOOKENTRY_H

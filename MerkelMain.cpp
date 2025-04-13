@@ -18,6 +18,8 @@ void MerkelMain::init() {
     int input;
     currentTime = orderBook.getEarliestTime();
 
+    wallet.insertCurrency("BTC", 10);
+
     printMenu();
 
     while (true) {
@@ -108,6 +110,16 @@ void MerkelMain::enterAsk() {
             tokens[0],
             OrderBookType::ask);
 
+            obe.username = "simuser";
+
+            if (wallet.canFulfillOrder(obe)) {
+                std::cout << "Wallet looks good." << std::endl;
+                orderBook.insertOrder(obe);
+            }
+            else {
+                std::cout << "Insufficient funds. " << std::endl;
+            }
+
             orderBook.insertOrder(obe);
         }
         catch (const std::exception& e) {
@@ -119,11 +131,51 @@ void MerkelMain::enterAsk() {
 }
 
 void MerkelMain::enterBid() {
-    std::cout << "Making a bid" << std::endl;
-}
+    std::cout << "Making a bid - enter: product,price,amount" << std::endl;
+    std::cout << "eg: ETH/BTC,200,0.5" << std::endl;
+
+    std::string input;
+
+    // ignore up to the maximum possible size of the stream
+    std::getline(std::cin, input);
+
+    std::vector<std::string> tokens = CSVReader::tokenize(input, ',');
+
+    std::cout << "You typed: " << input << std::endl;
+    if (tokens.size() != 3) {
+        std::cout << "Invalid input" << std::endl;
+    }
+    else {
+        try {
+            OrderBookEntry obe = CSVReader::stringsToOBE(
+            tokens[1],
+            tokens[2],
+            currentTime,
+            tokens[0],
+            OrderBookType::bid);
+
+            obe.username = "simuser";
+
+            if (wallet.canFulfillOrder(obe)) {
+                std::cout << "Wallet looks good." << std::endl;
+                orderBook.insertOrder(obe);
+            }
+            else {
+                std::cout << "Insufficient funds. " << std::endl;
+            }
+
+            orderBook.insertOrder(obe);
+        }
+        catch (const std::exception& e) {
+            std::cout << "MerkelMain::enterBid - Invalid input" << std::endl;
+        }
+
+    }}
 
 void MerkelMain::printWallet() {
-    std::cout << "Your wallet is empty" << std::endl;
+    std::cout << "Your wallet: " << std::endl;
+
+    std::cout << wallet.toString() << std::endl;
 }
 
 void MerkelMain::goToNextTimeFrame() {
@@ -137,6 +189,11 @@ void MerkelMain::goToNextTimeFrame() {
 
     for (OrderBookEntry& sale : sales) {
         std::cout << "Sale amount: " << sale.amount << " Price: " << sale.price << std::endl;
+
+        if (sale.username == "simuser") {
+            // update wallet
+            wallet.processSale(sale);
+        }
     }
 }
 

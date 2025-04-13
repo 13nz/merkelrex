@@ -11,4 +11,6 @@ add_executable(CurrencyExchange main.cpp
         CSVReader.cpp
         CSVReader.h
         OrderBook.cpp
-        OrderBook.h)
+        OrderBook.h
+        Wallet.cpp
+        Wallet.h)

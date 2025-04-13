@@ -119,26 +119,43 @@ std::vector<OrderBookEntry> OrderBook::matchAsksToBids(std::string product, std:
     // loop thru bids and asks
     for (OrderBookEntry& ask : asks) {
         for (OrderBookEntry& bid : bids) {
-            OrderBookEntry sale{ask.price, 0, timestamp, product, OrderBookType::sale};
+            if (bid.price >= ask.price)
+            {
+                OrderBookEntry sale{ask.price, 0, timestamp, product, OrderBookType::asksale};
 
-            if (bid.amount == ask.amount) {
-                sale.amount = ask.amount;
-                sales.push_back(sale);
-                bid.amount = 0;
-                break;
-            }
-            if (bid.amount > ask.amount) {
-                sale.amount = ask.amount;
-                sales.push_back(sale);
-                bid.amount = bid.amount - ask.amount;
-                break;
-            }
-            if (bid.amount < ask.amount) {
-                sale.amount = bid.amount;
-                sales.push_back(sale);
-                ask.amount = ask.amount - bid.amount;
-                bid.amount = 0;
-                continue;
+                OrderBookType type;
+
+                if (bid.username == "simuser") {
+                    type = OrderBookType::bidsale;
+                    sale.username = "simuser";
+                    sale.orderType = type;
+                }
+
+                if (ask.username == "simuser") {
+                    type = OrderBookType::asksale;
+                    sale.username = "simuser";
+                    sale.orderType = type;
+                }
+
+                if (bid.amount == ask.amount) {
+                    sale.amount = ask.amount;
+                    sales.push_back(sale);
+                    bid.amount = 0;
+                    break;
+                }
+                if (bid.amount > ask.amount) {
+                    sale.amount = ask.amount;
+                    sales.push_back(sale);
+                    bid.amount = bid.amount - ask.amount;
+                    break;
+                }
+                if (bid.amount < ask.amount && bid.amount > 0) {
+                    sale.amount = bid.amount;
+                    sales.push_back(sale);
+                    ask.amount = ask.amount - bid.amount;
+                    bid.amount = 0;
+                    continue;
+                }
             }
         }
     }
